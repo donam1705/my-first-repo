@@ -141,6 +141,7 @@ li {
 
 li:first-child span {
   text-decoration: line-through;
+  color: gray;
 }
 
 li button {
