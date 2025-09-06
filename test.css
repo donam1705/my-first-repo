@@ -117,16 +117,22 @@ body {
   border-radius: 2px;
 }
 
+.underline::after{
+  content: "";
+  width: 40px;
+  height: 2px;
+  color: #17694a;
+}
+
 .about-section {
   padding: 60px 0;
 }
 
 .about-img {
   border-radius: 12px;
-  width: 100%;
+  width: 110%;
   height: 100%;
   object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .about-box {
@@ -327,7 +333,110 @@ section {
   font-size: 0.95rem;
 }
 
+@media (max-width: 429px) {
 
-@media (max-width) {
-  
+  .navbar-brand .brand-title,
+  .navbar-brand .brand-slogan {
+    display: none;
+  }
+
+  .navbar-brand img {
+    width: 40px;   
+    height: 40px;
+  }
+
+   .lang {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+
+  .navbar {
+    min-height: 50px;
+  }
+}
+
+@media (max-width: 767.98px) {
+
+  .hero {
+    height: 60vh;
+    padding: 20px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .about-box {
+    margin-left: 0;
+    margin-top: 20px;
+    height: auto;
+  }
+  .about-img {
+    width: 100%; 
+    height: auto;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+  .nav-link {
+    display: block;
+    padding: 10px 0;
+  }
+
+  .team-arrow {
+    display: none;
+  }
+
+  .contact-form {
+    padding: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+  }
+
+  .about-img {
+    width: 100%;
+  }
+
+  .about-box {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+  .navbar-brand .brand-slogan {
+    font-size: 0.53rem
+  }
+  .navbar-brand .brand-title {
+    font-size: 1.2rem;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.8rem;  
+    padding: 6px 8px;    
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+
+  .about-box {
+    margin-left: -30px;
+    margin-top: -20px;
+  }
 }
