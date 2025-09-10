@@ -1,0 +1,684 @@
+
+.no-caret::after {
+  display: none !important;
+}
+
+.custom-menu-toggle {
+  position: relative;
+}
+
+.custom-menu-toggle .btn{
+  font-size: 30px;
+  margin-right: 30px;
+}
+
+.mega-menu {
+  position: absolute;
+  top: 66px;
+  width: 100vw; 
+  max-width: 1300px;
+  background: #fff;
+  display: none;
+  z-index: 1;
+  border-top: 1px solid brown;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.custom-menu-toggle:hover .mega-menu {
+  display: block;
+}
+
+.mega-menu h6 {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.mega-menu a {
+  font-size: 13px;
+  text-decoration: none;
+  color: #333;
+}
+
+.mega-menu a:hover {
+  color: brown;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+.navbar-nav .nav-link {
+  color: black;
+  font-size: 14px;   
+  font-weight: 700;  
+  padding: 8px 12px; 
+}
+
+.navbar-nav .nav-link:hover {
+  color: brown;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+  top: 55px;
+  border-top: 1px solid brown;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.no-caret::after {
+  display: none !important;
+}
+
+.navbar .btn-search {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #b1c9e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .btn-search:hover {
+  background: #407daf;
+}
+
+.navbar .btn-search i {
+  font-size: 16px;
+  color: #333;
+}
+
+/* main va side-news */
+
+.news-main-box {
+  position: relative;
+  height: 100%;
+}
+
+.news-main-box img {
+  width: 100%;
+  height: 100%;       
+  object-fit: cover;   
+}
+
+.news-main-box .news-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
+}
+
+.news-main-box a{
+  text-decoration: none;
+  color: white;
+}
+
+.news-main-box a:hover{
+  text-decoration: underline;
+}
+
+.news-main-box .overlay h1 {
+  font-size: 35px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.news-side-box {
+  gap: 15px;
+  align-items: flex-start;
+  height: 100%;
+  border-bottom: 1px solid rgba(183, 181, 181, 0.5);
+}
+
+.news-side-box:last-child{
+  border-bottom: none; 
+}
+
+.news-side-box img {
+  flex: 0 0 120px;
+  height: 120px;
+  object-fit: cover;
+  transition: transform 0.3s ease; 
+}
+
+.news-side-box img:hover {
+  transform: scale(1.1);
+}
+
+.news-side-box .text {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-side-box a{
+  text-decoration: none;
+  color: black;
+}
+
+.news-side-box a:hover{
+  color: brown;
+}
+
+.news-side-box .text h6 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.news-side-box .text p {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+.news-side-box .text small {
+  font-size: 12px;
+  color: #888;
+}
+
+/* tieu diem va kinh te vi mo */
+
+.section-title-left {
+  border-left: 1px solid rgba(183, 181, 181, 0.5);
+  padding-left: 10px;
+  height: 100%;
+}
+
+.section-title {
+  border-left: 4px solid #d32f2f;
+  padding-left: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;              
+  line-height: 1.2;       
+}
+
+.section-news .nav .nav-link {
+  text-transform: uppercase;
+  padding: 0 10px; 
+  font-size: 15px;
+  color: #9d9999;
+  font-weight: 500;
+}
+
+.section-title a{
+  color: black;
+  text-decoration: none;
+  font-size: 30px;
+}
+
+.section-title a:hover{
+  text-decoration: underline;
+}
+
+.main-news img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.side-news {
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(183, 181, 181, 0.5);
+}
+
+.side-news:last-child {
+  border: none;
+}
+
+.side-news img {
+  flex: 0 0 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.main-news a{
+  text-decoration: none;
+  color: black;
+}
+
+.main-news a:hover{
+  text-decoration: underline;
+}
+
+
+.side-news .text h6 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.side-news .text small {
+  color: #888;
+  font-size: 12px;
+}
+
+.section-news {
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.section-news:last-child{
+  border: none;
+}
+
+.side-news .text h6 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.side-news .text p {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+.side-news .text small {
+  color: #888;
+}
+
+.side-news a{
+  color: black;
+  text-decoration: none;
+}
+
+.side-news a:hover{
+  color: brown;
+}
+
+/* kinh doanh */
+.business{
+  background-color: rgba(183, 181, 181, 0.5);
+  padding-top: 15px;
+}
+
+.section-title-line {
+  display: inline-block;
+  position: relative;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 0 20px;
+}
+
+.section-title-line::before,
+.section-title-line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 2px;
+  background: #333;
+}
+
+.section-title-line::before {
+  left: -70px;
+}
+
+.section-title-line::after {
+  right: -70px;
+}
+
+.section-title-line a{
+  color: black;
+  text-decoration: none;
+  font-size: 30px;
+}
+
+.section-title-line a:hover{
+  text-decoration: underline;
+}
+
+.sub-menu .nav-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  padding: 2px 12px;
+}
+
+.main-news img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.business .side-news img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.side-news img:hover {
+  transform: scale(1.05);
+} 
+
+/* bat dong san */
+.bds {
+  background: #cceeff; /
+}
+
+.bds .main-news img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.main-news .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  border-radius: 0 0 6px 6px;
+}
+
+.bds .side-news img {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+}
+
+.bds .side-news h6 {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+/* doanh nhan */
+.business-man .item img {
+  transition: transform 0.3s ease;
+}
+
+.business-man .item img:hover {
+  transform: scale(1.05); 
+}
+
+.business-man a{
+  text-decoration: none;
+  color: black;
+}
+
+.business-man a:hover{
+  color: brown;
+}
+
+.business-man .item h6 {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* xe va cong nghe */
+.car .item img {
+  transition: transform 0.3s ease;
+}
+
+.car .item img:hover {
+  transform: scale(1.05); 
+}
+
+.car a{
+  text-decoration: none;
+  color: black;
+}
+
+.car a:hover{
+  color: brown;
+}
+
+.car .item h6 {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* lam giau */
+.rich .item img {
+  transition: transform 0.3s ease;
+}
+
+.rich .item img:hover {
+  transform: scale(1.05); 
+}
+
+.rich a{
+  text-decoration: none;
+  color: black;
+}
+
+.rich a:hover{
+  color: brown;
+}
+
+.rich .item h6 {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* footer */
+.footer{
+  margin-top: 70px;
+  background-color: #f9f9f9;
+}
+
+.footer-nav {
+  border-bottom: 2px solid brown; 
+  padding-bottom: 5px;              
+}
+
+.footer-nav .nav-link {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.footer-nav .nav-link:hover {
+  color: brown;
+}
+
+.footer p, 
+.footer small {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.footer a {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: brown;
+}
+
+
+@media (max-width: 992px) {
+  .navbar-nav .nav-link {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .news-main-box .overlay h1 {
+    font-size: 28px;
+  }
+
+  .news-side-box img, 
+  .side-news img {
+    height: 100px;
+  }
+
+  .section-news .nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand img {
+    height: 32px;
+  }
+
+  .navbar .btn-search {
+    width: 30px;
+    height: 30px;
+  }
+
+  .news-main-box .overlay h1 {
+    font-size: 22px;
+  }
+
+  .col-lg-4.d-flex.flex-column.gap-3 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr; 
+    gap: 12px;
+  }
+
+  .col-lg-4.d-flex.flex-column.gap-3 .news-side-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: none !important;  
+    box-shadow: none !important; 
+  }
+
+  .col-lg-4.d-flex.flex-column.gap-3 .news-side-box img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+  }
+
+  .col-lg-4.d-flex.flex-column.gap-3 .news-side-box p, small {
+    display: none;
+  }
+
+  .col-lg-4.d-flex.flex-column.gap-3 .news-side-box h6 {
+    font-size: 14px;
+    margin-top: 6px;
+    line-height: 1.3;
+  }
+
+  .section-news .col-lg-4 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .section-news .news-side-box {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+  }
+
+  .section-news .news-side-box img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .section-title-line {
+    font-size: 20px;
+  }
+
+  .footer-nav .nav-link {
+    font-size: 12px;
+  }
+
+  .side-news, .news-side-box {
+    width: 48%; 
+    display: inline-flex; 
+    vertical-align: top;
+  }
+
+  .hot-news .col-lg-6.d-flex,
+  .col-lg-6.d-flex.flex-column {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .side-news, .news-side-box .text p {
+    display: none;
+  }
+
+  .side-news img,
+  .news-side-box img {
+    flex: 0 0 80px;
+    height: 80px;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    justify-content: flex-start !important;
+  }
+
+  .footer-nav .nav-item {
+    width: 50%; 
+    text-align: left;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .section-title-line {
+    font-size: 18px;
+  }
+
+  .news-main-box .overlay h1 {
+    font-size: 18px;
+  }
+
+  .side-news .text h6,
+  .news-side-box .text h6 {
+    font-size: 13px;
+  }
+
+  .side-news img,
+  .news-side-box img {
+    flex: 0 0 70px;
+    height: 70px;
+  }
+
+  .footer-nav .nav-item {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1279px) {
+  .navbar-nav,
+  .navbar-toggler,
+  .collapse.navbar-collapse {
+    display: none !important;
+  }
+
+  .navbar-brand {
+    order: 2;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .btn-search {
+    order: 3;
+    margin-left: auto;
+  }
+}
