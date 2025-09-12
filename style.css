@@ -542,6 +542,19 @@
   }
 }
 
+@media (max-width: 992px) and (min-width: 768px) {
+  .footer-nav {
+    flex-wrap: nowrap !important;   
+    overflow-x: auto;               
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .footer-nav .nav-link {
+      font-size: 12px;   
+      padding: 0 4px;   
+  }
+}
+
 @media (min-width:768px){
   .mega-menu span{
     display: none;
