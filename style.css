@@ -12,16 +12,42 @@
   margin-right: 30px;
 }
 
+.mega-menu .container {
+  max-width: 1140px;    
+}
+
 .mega-menu {
-  position: absolute;
-  top: 66px;
-  width: 100vw;
-  background: #fff;
   display: none;
+  position: absolute;
+  top: 100%;   
+  left: 0;
+  width: 100%;
+  background: #fff;
   z-index: 1;
   border-bottom: 4px solid brown;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.custom-menu-toggle:hover + .mega-menu,
+.mega-menu:hover {
+  display: block;
+}
+
+.mega-menu .container {
+  max-width: 100% !important; 
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.mega-menu .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.mega-menu .col-6,
+.mega-menu .col-md-4 {
+  padding-left: 15px; 
 }
 
 .custom-menu-toggle:hover .mega-menu {
@@ -83,7 +109,8 @@
   background: #b1c9e0;
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center; 
+}
 
 .navbar .btn-search:hover {
   background: #407daf;
@@ -92,6 +119,12 @@
 .navbar .btn-search i {
   font-size: 16px;
   color: #333;
+}
+
+.side-news p,
+.news-side-box p {
+  font-weight: 500;   
+  color: #222;        
 }
 
 
@@ -106,6 +139,10 @@
   width: 100%;
   height: 100%;       
   object-fit: cover;   
+}
+
+.col-lg-8.col-md-8.col-12{
+  padding-right: 15px;
 }
 
 .news-main-box .news-overlay {
@@ -342,11 +379,11 @@
   text-decoration: underline;
 }
 
-
 .business .side-news small {
   margin-top: 4px;   
   display: block;
 }
+
 
 .business .main-news p {
   margin-bottom: 4px; 
@@ -649,6 +686,15 @@
     font-size: 12px;
   }
 
+  .mega-menu .btn:focus,
+  .mega-menu .btn:active,
+  .mega-menu .btn.show {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
   .side-news, .news-side-box {
     display: inline-flex; 
     vertical-align: top;
@@ -694,6 +740,13 @@
   .business .side-news p,
   .business .side-news small {
     text-align: left;  
+  }
+
+  section.business-man,
+  section.car .container {
+    border-bottom: 1px solid #ddd;  
+    margin-bottom: 20px;
+    padding-bottom: 20px;
   }
 
   .business-man .row.g-4 {
@@ -787,6 +840,22 @@
 }
 
 @media (max-width: 1279px) {
+
+  .mega-menu .container {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .mega-menu .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .mega-menu .col-6,
+  .mega-menu .col-md-4 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   .navbar-nav,
   .navbar-toggler,
   .collapse.navbar-collapse {
