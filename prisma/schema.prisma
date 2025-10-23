@@ -1,0 +1,96 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String?
+  products    Product[]
+}
+
+model Product {
+  id          Int          @id @default(autoincrement())
+  name        String
+  sku         String       @unique
+  price       Float
+  qty         Int
+  imageUrl    String?
+  description String?
+  categoryId  Int
+  category    Category     @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime     @default(now())
+
+  orderItems  OrderItem[]
+  wishlists   Wishlist[]
+}
+
+model User {
+  id          Int        @id @default(autoincrement())
+  name        String
+  email       String     @unique
+  password    String
+  isVerified  Boolean  @default(false) 
+  verifyToken String?
+
+  phone       String?
+  address     String?
+  avatar      String?
+  gender      String?
+  birthDate   DateTime?
+  role        String     @default("user")
+  isActive    Boolean    @default(true)
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  orders      Order[]
+  wishlists   Wishlist[]
+}
+
+model Order {
+  id            Int          @id @default(autoincrement())
+  userId        Int
+  user          User         @relation(fields: [userId], references: [id])
+  status        String       @default("pending")
+  totalAmount   Float
+  paymentMethod String?
+  paymentStatus String       @default("unpaid") 
+  receiverName  String
+  phone         String
+  address       String
+  note          String?
+  shippingFee   Float        @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+}
+
+
+model Wishlist {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}

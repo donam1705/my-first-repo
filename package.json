@@ -1,0 +1,39 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.17.0",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/postcss": "^4.1.14",
+    "bcryptjs": "^3.0.2",
+    "bullmq": "^5.61.0",
+    "formik": "^2.4.6",
+    "ioredis": "^5.8.2",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.545.0",
+    "next": "15.5.4",
+    "nodemailer": "^7.0.9",
+    "postcss": "^8.5.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-slick": "^0.31.0",
+    "react-toastify": "^11.0.5",
+    "recharts": "^3.2.1",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^12.0.2",
+    "swr": "^2.3.6",
+    "tailwindcss": "^4.1.14",
+    "yup": "^1.7.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "prisma": "^6.17.1"
+  }
+}
