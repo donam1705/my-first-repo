@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const RegisterSchema = Yup.object({
   name: Yup.string()
@@ -22,6 +23,7 @@ const RegisterSchema = Yup.object({
 
 export default function RegisterPage() {
   const [message, setMessage] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
   const router = useRouter();
 
   return (
@@ -49,9 +51,7 @@ export default function RegisterPage() {
             const data = await res.json();
             if (!res.ok) throw new Error(data.message);
             setMessage('Đăng ký thành công!');
-            setTimeout(() => {
-              router.push('/auth/login');
-            }, 1000);
+            setShowPopup(true);
           } catch (error) {
             setMessage(error.message);
           } finally {
@@ -145,13 +145,38 @@ export default function RegisterPage() {
 
             <p className="text-center text-sm mt-4">
               Đã có tài khoản?{' '}
-              <a href="/auth/login" className="text-blue-600 hover:underline">
+              <Link
+                href="/auth/login"
+                className="text-blue-600 hover:underline"
+              >
                 Đăng nhập tại đây
-              </a>
+              </Link>
             </p>
           </Form>
         )}
       </Formik>
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+          <div className="bg-white rounded-xl p-6 shadow-lg w-80 text-center">
+            <h3 className="text-lg font-bold mb-2">Đăng ký thành công!</h3>
+            <p className="text-gray-700">
+              Chúng tôi đã gửi email xác minh đến địa chỉ của bạn.
+            </p>
+            <p className="text-gray-700 mt-2">
+              Vui lòng kiểm tra email để kích hoạt tài khoản.
+            </p>
+            <button
+              className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+              onClick={() => {
+                setShowPopup(false);
+                router.push('/auth/login');
+              }}
+            >
+              Đã hiểu
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,29 +1,26 @@
 import HeroBanner from '../../components/SwiperBanner';
 import ProductItem from '../../components/ProductItem';
 import CategoryShow from '../../components/CategoryShow';
+import { getBaseUrl } from '@/lib/getBaseUrl';
 
 async function getProducts() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
 
   try {
-    const res = await fetch(`${baseUrl}/api/products`, {
-      cache: 'no-store',
-    });
+    console.log('Fetching products from:', baseUrl);
 
-    if (!res.ok) {
-      console.error('API trả về lỗi:', res.status);
+    const res = await fetch(`${baseUrl}/api/products`, { cache: 'no-store' });
+    if (!res || !res.ok) {
+      const statusCode = res?.status || 'unknown';
+      console.error('API trả về lỗi:', statusCode);
       return [];
     }
-
     const data = await res.json();
-    if (!Array.isArray(data)) {
-      console.warn('Dữ liệu API không phải mảng:', data);
-      return [];
-    }
+    const products = Array.isArray(data) ? data : data.products || [];
 
-    return data;
+    return products;
   } catch (error) {
-    console.error('Lỗi khi fetch sản phẩm:', error);
+    console.error(' Lỗi khi fetch sản phẩm:', error);
     return [];
   }
 }

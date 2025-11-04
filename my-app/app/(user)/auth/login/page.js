@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 
 const LoginSchema = Yup.object({
   email: Yup.string().email('Email không đúng').required('Nhập email'),
@@ -40,6 +41,7 @@ export default function LoginPage() {
             toast.success('Đăng nhập thành công!');
             setTimeout(() => {
               router.push('/');
+              router.refresh();
             }, 1000);
           } catch (error) {
             // lỗi đã được xử lý bằng toast.error
@@ -85,16 +87,25 @@ export default function LoginPage() {
             >
               {isSubmitting ? 'Đang xử lý...' : 'Đăng nhập'}
             </button>
-
-            <p className="text-center text-sm mt-4">
-              Chưa có tài khoản?{' '}
-              <a
-                href="/auth/register"
-                className="text-blue-600 hover:underline"
-              >
-                Đăng kí ngay
-              </a>
-            </p>
+            <div className="flex justify-between items-center mt-4">
+              <p>
+                Chưa có tài khoản?{' '}
+                <Link
+                  href="/auth/register"
+                  className="text-blue-500 hover:underline"
+                >
+                  Đăng kí ngay
+                </Link>
+              </p>
+              <p>
+                <Link
+                  href="/auth/forget-password"
+                  className="text-red-500 hover:underline text-sm"
+                >
+                  Quên mật khẩu?
+                </Link>
+              </p>
+            </div>
           </Form>
         )}
       </Formik>

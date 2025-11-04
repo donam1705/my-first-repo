@@ -231,9 +231,10 @@ export default function Header() {
                   </Link>
 
                   <button
-                    onClick={() => {
-                      logout();
+                    onClick={async () => {
+                      await logout();
                       setDropdownUser(false);
+                      router.push('/');
                     }}
                     className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-50"
                   >

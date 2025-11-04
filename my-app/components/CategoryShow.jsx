@@ -2,23 +2,49 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Heart } from 'lucide-react';
 import { useCartStore } from '@/lib/store/useCart';
+import { getBaseUrl } from '@/lib/getBaseUrl';
 
 export default function CategoryShow() {
   const [categories, setCategories] = useState([]);
   const [trending, setTrending] = useState([]);
+  const [wishlist, setWishlist] = useState(new Set());
   const addToCart = useCartStore((state) => state.addToCart);
+
+  const toggleWishlist = async (product) => {
+    try {
+      const isFav = wishlist.has(product.id);
+      const method = isFav ? 'DELETE' : 'POST';
+
+      await fetch('/api/wishlist', {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: product.id }),
+      });
+
+      setWishlist((prev) => {
+        const newSet = new Set(prev);
+        isFav ? newSet.delete(product.id) : newSet.add(product.id);
+        return newSet;
+      });
+    } catch (err) {
+      console.error('Wishlist error:', err);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
+      const baseUrl = getBaseUrl();
+      console.log('Fetching API từ:', baseUrl);
+
       try {
-        const baseUrl =
-          process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
         const [catRes, prodRes] = await Promise.all([
           fetch(`${baseUrl}/api/categories`, { cache: 'no-store' }),
           fetch(`${baseUrl}/api/products`, { cache: 'no-store' }),
         ]);
+
+        if (!catRes.ok || !prodRes.ok) throw new Error('API lỗi!');
 
         const catData = await catRes.json();
         const prodData = await prodRes.json();
@@ -72,11 +98,7 @@ export default function CategoryShow() {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 rounded-2xl overflow-hidden mb-12 p-4">
         {[
-          {
-            icon: '🚚',
-            title: 'Free Delivery',
-            desc: 'Orders from all items',
-          },
+          { icon: '🚚', title: 'Free Delivery', desc: 'Orders from all items' },
           {
             icon: '💰',
             title: 'Return & Refund',
@@ -120,33 +142,58 @@ export default function CategoryShow() {
             {trending.map((p) => (
               <div
                 key={p.id}
-                className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col"
+                className="group relative bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
               >
                 <Link
                   href={`/products/${p.id}`}
-                  className="relative w-full h-48"
+                  className="flex-1 flex flex-col"
                 >
-                  <Image
-                    src={p.imageUrl || '/uploads/placeholder.svg'}
-                    alt={p.name}
-                    fill
-                    className="object-cover"
-                  />
+                  <div className="relative w-full h-56 overflow-hidden">
+                    <Image
+                      src={p.imageUrl || '/uploads/placeholder.svg'}
+                      alt={p.name}
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+
+                  <div className="p-4 flex flex-col flex-1">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-1 line-clamp-2 group-hover:text-blue-600">
+                      {p.name}
+                    </h3>
+
+                    <p className="text-blue-600 font-bold text-lg mt-auto">
+                      {p.price.toLocaleString()} ₫
+                    </p>
+                  </div>
                 </Link>
 
-                <div className="p-4 flex flex-col flex-1">
-                  <h3 className="text-gray-800 font-semibold text-base line-clamp-2 mb-1">
-                    {p.name}
-                  </h3>
-                  <p className="text-blue-600 font-bold mb-3">
-                    {p.price.toLocaleString()} ₫
-                  </p>
+                <button
+                  onClick={() => toggleWishlist(p)}
+                  aria-pressed={wishlist.has(p.id)}
+                  className="absolute top-3 right-3 z-10 bg-white/80 backdrop-blur rounded-full p-2 hover:scale-105 transition"
+                  title={
+                    wishlist.has(p.id)
+                      ? 'Xóa khỏi yêu thích'
+                      : 'Thêm vào yêu thích'
+                  }
+                >
+                  <Heart
+                    className={
+                      wishlist.has(p.id) ? 'text-red-500' : 'text-gray-500'
+                    }
+                    size={18}
+                  />
+                </button>
 
+                <div className="p-4 pt-0">
                   <button
                     onClick={() => addToCart(p)}
-                    className="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-md flex items-center justify-center gap-2 transition"
+                    className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md py-2.5 transition"
                   >
-                    <ShoppingCart size={16} />
+                    <ShoppingCart size={18} />
                     <span>Thêm vào giỏ hàng</span>
                   </button>
                 </div>

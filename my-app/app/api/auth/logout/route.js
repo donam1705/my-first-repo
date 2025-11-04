@@ -1,6 +1,6 @@
-import { cookies } from 'next/headers';
+import { removeAuthCookie } from '@/lib/auth';
 
 export async function POST() {
-  cookies().set('token', '', { maxAge: 0, path: '/' });
-  return Response.json({ message: 'Đã đăng xuất' });
+  removeAuthCookie();
+  return Response.json({ message: 'Đăng xuất thành công' });
 }
