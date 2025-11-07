@@ -9,10 +9,10 @@ export async function POST(req) {
     const { email, password } = await req.json();
     const user = await prisma.user.findUnique({ where: { email } });
 
-    if (!user || user.role !== 'user') {
+    if (!user || user.role !== 'admin') {
       return NextResponse.json(
-        { error: 'Tài khoản không tồn tại hoặc không hợp lệ' },
-        { status: 400 }
+        { error: 'Không có quyền truy cập Admin' },
+        { status: 403 }
       );
     }
 
@@ -28,11 +28,11 @@ export async function POST(req) {
     });
 
     const cookieStore = await cookies();
-    cookieStore.set('user_token', token, {
+    cookieStore.set('admin_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      path: '/',
+      path: '/admin',
       maxAge: 60 * 60 * 24 * 7,
     });
 
@@ -46,7 +46,7 @@ export async function POST(req) {
       },
     });
   } catch (error) {
-    console.error('User Login API Error:', error);
+    console.error('Admin Login API Error:', error);
     return NextResponse.json({ error: 'Lỗi server' }, { status: 500 });
   }
 }

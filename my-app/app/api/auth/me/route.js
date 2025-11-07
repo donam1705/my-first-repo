@@ -6,7 +6,9 @@ import { prisma } from '@/lib/prisma';
 export async function GET() {
   try {
     const cookieStore = await cookies();
-    const token = cookieStore.get('token')?.value;
+    const token =
+      cookieStore.get('user_token')?.value ||
+      cookieStore.get('admin_token')?.value;
 
     if (!token) {
       return NextResponse.json({ user: null });
@@ -23,6 +25,7 @@ export async function GET() {
         id: true,
         name: true,
         email: true,
+        role: true,
         phone: true,
         birthDate: true,
         address: true,
@@ -39,6 +42,7 @@ export async function GET() {
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
         phone: user.phone,
         birthDate: user.birthDate,
         address: user.address,

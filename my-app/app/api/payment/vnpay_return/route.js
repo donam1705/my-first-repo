@@ -10,26 +10,24 @@ export async function GET(req) {
     const url = new URL(req.url);
     const query = Object.fromEntries(url.searchParams.entries());
     console.log('VNPay return raw query:', query);
+
     const secureHash = query.vnp_SecureHash;
     delete query.vnp_SecureHash;
     delete query.vnp_SecureHashType;
-    const keys = Object.keys(query).sort();
+
     const sorted = {};
-    for (const k of keys) {
-      sorted[k] = encodeURIComponent(query[k]).replace(/%20/g, '+');
+    for (const key of Object.keys(query).sort()) {
+      sorted[key] = encodeURIComponent(query[key]).replace(/%20/g, '+');
     }
 
     const signData = Object.keys(sorted)
       .map((k) => `${k}=${sorted[k]}`)
       .join('&');
+
     const signed = crypto
       .createHmac('sha512', VNP_HASH_SECRET)
       .update(signData, 'utf8')
       .digest('hex');
-
-    console.log('VNPay return signData:', signData);
-    console.log('secureHash from VNPay:', secureHash);
-    console.log('recomputed hash:', signed);
 
     if (secureHash !== signed) {
       console.error('Checksum không hợp lệ');
@@ -50,7 +48,7 @@ export async function GET(req) {
       order = await prisma.order.findUnique({ where: { id: maybeId } });
     }
     if (!order) {
-      order = await prisma.order.findFirst({ where: { vnpTxnRef: txnRef } });
+      order = await prisma.order.findFirst({ where: { txnRef } });
     }
 
     if (!order) {
@@ -66,7 +64,12 @@ export async function GET(req) {
     if (responseCode === '00') {
       await prisma.order.update({
         where: { id: order.id },
-        data: { status: 'PAID', paidAt: new Date() },
+        data: {
+          status: 'PAID',
+          paymentStatus: 'paid',
+          paymentMethod: 'VNPAY',
+          paidAt: new Date(),
+        },
       });
       return NextResponse.redirect(
         `${APP_URL}/payment/success?orderId=${order.id}`
@@ -74,14 +77,14 @@ export async function GET(req) {
     } else {
       await prisma.order.update({
         where: { id: order.id },
-        data: { status: 'FAILED' },
+        data: { status: 'FAILED', paymentStatus: 'unpaid' },
       });
       return NextResponse.redirect(
         `${APP_URL}/payment/failed?orderId=${order.id}&code=${responseCode}`
       );
     }
   } catch (error) {
-    console.error('Lỗi xử lý VNPay return:', error);
+    console.error('Lỗi xử lý VNPay return:', error.message);
     return NextResponse.redirect(`${APP_URL}/payment/failed?reason=server`);
   }
 }

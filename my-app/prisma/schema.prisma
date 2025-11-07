@@ -59,7 +59,7 @@ model User {
 
 model Order {
   id            Int          @id @default(autoincrement())
-  txnRef      String?   @unique
+  txnRef        String?      @unique
   userId        Int
   user          User         @relation(fields: [userId], references: [id])
   status        String       @default("pending")
@@ -73,9 +73,12 @@ model Order {
   shippingFee   Float        @default(0)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
+  paidAt        DateTime?
 
   items         OrderItem[]
+  paymentTransactions PaymentTransaction[] 
 }
+
 
 model OrderItem {
   id        Int      @id @default(autoincrement())
@@ -88,14 +91,43 @@ model OrderItem {
   product   Product  @relation(fields: [productId], references: [id])
 }
 
-enum OrderStatus {
-  PENDING     
-  CONFIRMED   
-  SHIPPING    
-  COMPLETED   
-  CANCELLED  
+enum PaymentMethod {
+  VNPAY
+  COD
+  BANK_TRANSFER
 }
 
+enum OrderStatus {
+  PENDING
+  PAID
+  CONFIRMED
+  SHIPPING
+  COMPLETED
+  CANCELLED
+  FAILED
+}
+
+model Payment {
+  id         Int @id @default(autoincrement())
+  orderId    Int
+  amount     Float
+  method     String
+  status     String
+  createdAt  DateTime @default(now())
+}
+
+model PaymentTransaction {
+  id          Int      @id @default(autoincrement())
+  orderId     Int
+  amount      Float
+  bankCode    String?
+  txnRef      String
+  responseCode String
+  status      String
+  createdAt   DateTime @default(now())
+
+  order       Order @relation(fields: [orderId], references: [id])
+}
 
 model Wishlist {
   id        Int      @id @default(autoincrement())

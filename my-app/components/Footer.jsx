@@ -80,7 +80,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/order" className="hover:text-white transition">
+              <Link href="/orders" className="hover:text-white transition">
                 Đơn hàng
               </Link>
             </li>

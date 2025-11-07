@@ -7,50 +7,42 @@ export function signToken(payload) {
   return jwt.sign(payload, SECRET, { expiresIn: '7d' });
 }
 
-export async function setAuthCookie(token) {
-  const cookieStore = await cookies();
-  cookieStore.set('token', token, {
+export function setUserCookie(token) {
+  const cookieStore = cookies();
+  cookieStore.set('user_token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
     maxAge: 7 * 24 * 60 * 60,
-    path: '/',
   });
 }
 
-export async function removeAuthCookie() {
-  const cookieStore = await cookies();
-  cookieStore.set('token', '', {
+export function setAdminCookie(token) {
+  const cookieStore = cookies();
+  cookieStore.set('admin_token', token, {
     httpOnly: true,
-    maxAge: 0,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
     path: '/',
+    maxAge: 7 * 24 * 60 * 60,
   });
 }
 
-export async function getUserFromToken() {
-  try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get('token')?.value;
-    if (!token) return null;
-
-    return jwt.verify(token, SECRET);
-  } catch (err) {
-    console.error('JWT verify failed:', err);
-    return null;
-  }
+export function removeAuthCookie(name = 'user_token') {
+  const cookieStore = cookies();
+  cookieStore.set(name, '', { httpOnly: true, maxAge: 0, path: '/' });
 }
 
-export async function getUserFromRequest(req) {
+export function getUserFromToken(type = 'user') {
   try {
-    const cookieHeader = req.headers.get('cookie') || '';
-    const token = cookieHeader
-      .split('; ')
-      .find((c) => c.startsWith('token='))
-      ?.split('=')[1];
+    const cookieStore = cookies();
+    const tokenName = type === 'admin' ? 'admin_token' : 'user_token';
+    const token = cookieStore.get(tokenName)?.value;
     if (!token) return null;
-
     return jwt.verify(token, SECRET);
   } catch (err) {
-    console.error('Token from request invalid:', err);
+    console.error('JWT verify failed:', err.message);
     return null;
   }
 }

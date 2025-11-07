@@ -1,7 +1,14 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Folder, Package, Settings, Users } from 'lucide-react';
+import {
+  Home,
+  Folder,
+  Package,
+  ShoppingCart,
+  Settings,
+  Users,
+} from 'lucide-react';
 
 export default function SidebarAdmin() {
   const pathname = usePathname();
@@ -13,6 +20,11 @@ export default function SidebarAdmin() {
       name: 'Categories',
       href: '/admin/categories',
       icon: <Folder size={18} />,
+    },
+    {
+      name: 'Orders',
+      href: '/admin/orders',
+      icon: <ShoppingCart size={18} />,
     },
     { name: 'Users', href: '/admin/users', icon: <Users size={18} /> },
     { name: 'Settings', href: '/admin/settings', icon: <Settings size={18} /> },
